@@ -50,25 +50,49 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[7.6.0, )"
+            },
+            "ExtentReports": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
-              "version": "[17.8.0, )"
+              "version": "[17.13.0, )"
             },
             "NUnit": {
               "target": "Package",
-              "version": "[3.14.0, )"
+              "version": "[4.3.2, )"
             },
             "NUnit.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[3.9.0, )"
+              "version": "[4.6.0, )"
             },
             "NUnit3TestAdapter": {
               "target": "Package",
-              "version": "[4.5.0, )"
+              "version": "[5.0.0, )"
+            },
+            "Selenium.WebDriver": {
+              "target": "Package",
+              "version": "[4.28.0, )"
+            },
+            "WebGrease": {
+              "target": "Package",
+              "version": "[1.6.0, )"
             },
             "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[6.0.4, )"
+            },
+            "log4net": {
+              "target": "Package",
+              "version": "[3.0.3, )"
             }
           },
           "imports": [
