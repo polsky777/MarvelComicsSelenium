@@ -9,7 +9,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
-
+using log4net.Config;
 
 namespace MarvelSelenium.basetest
 {
@@ -23,6 +23,7 @@ namespace MarvelSelenium.basetest
         private static readonly ILog log = LogManager.GetLogger(typeof(BaseTest));
         IConfiguration configuration;
         static string fileName;
+
         static BaseTest()
         {
             DateTime currentTime = DateTime.Now;
@@ -42,12 +43,36 @@ namespace MarvelSelenium.basetest
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
-            log.Info("Test execution started !!!");
-            var path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources\";
-            configuration = new ConfigurationBuilder()
-                .SetBasePath(path)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .Build();
+            try
+            {
+                var logRepository = LogManager.GetRepository(System.Reflection.Assembly.GetEntryAssembly());
+                string projectRoot = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
+                string logConfigPath = Path.Combine(projectRoot, "resources", "log4net.config");
+
+                if (!File.Exists(logConfigPath))
+                {
+                    throw new FileNotFoundException($"Nie znaleziono pliku konfiguracyjnego log4net: {logConfigPath}");
+                }
+
+                XmlConfigurator.Configure(logRepository, new FileInfo(logConfigPath));
+                log.Info("Test execution started !!!");
+
+                //string configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources");
+
+                string configPath = Path.Combine(projectRoot, "resources");
+
+                configuration = new ConfigurationBuilder()
+                    .SetBasePath(configPath)
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .Build();
+
+                log.Info("Konfiguracja wczytana poprawnie.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Błąd inicjalizacji: {ex.Message}");
+                throw;
+            }
         }
 
         [SetUp]
@@ -74,11 +99,41 @@ namespace MarvelSelenium.basetest
             //http://localhost:4444
             dynamic options = getBrowserOtpion(browserName);
             options.PlatformName = "windows";
-            //options.AddUserProfilePreference("profile.default_content_setting_values.notifications", 2); //1 - alllow 2 - block
-            driver.Value = new RemoteWebDriver(new Uri(configuration["AppSettings:gridurl"]), options.ToCapabilities());
+            options.AddArgument("--incognito");
+
+            string useSeleniumGrid = configuration["AppSettings:seleniumGrid"];
+
+            if (useSeleniumGrid == "Y")
+            {
+                driver.Value = new RemoteWebDriver(new Uri(configuration["AppSettings:gridurl"]), options.ToCapabilities());
+                log.Info("Running on Selenium Grid");
+            }
+            else
+            {
+                if (browserName == "chrome")
+                {
+                    driver.Value = new ChromeDriver();
+                }
+                else if (browserName == "firefox")
+                {
+                    driver.Value = new FirefoxDriver();
+                }
+                else
+                {
+                    throw new ArgumentException("Nieobsługiwana przeglądarka: " + browserName);
+                }
+
+                log.Info("Running locally");
+            }
+
+            if (useSeleniumGrid != "Y" && useSeleniumGrid != "N")
+            {
+                log.Error("Invalid value for AppSettings:seleniumGrid. Allowed values: 'Y' or 'N'");
+                throw new ArgumentException("Invalid value for AppSettings:seleniumGrid. Allowed values: 'Y' or 'N'.");
+            }
 
             GetDriver().Url = configuration["AppSettings:testsiteurl"];
-            options.AddArgument("--incognito");
+
             GetDriver().Manage().Window.Maximize();
             GetDriver().Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(int.Parse(configuration["AppSettings:implicit.wait"]));
         }
@@ -107,7 +162,7 @@ namespace MarvelSelenium.basetest
             extent.AttachReporter(htmlReporter);
 
             extent.AddSystemInfo("Automation Tester", "Tomasz Polski");
-            extent.AddSystemInfo("Organization", "Marvel's Fan");
+            extent.AddSystemInfo("Organization", "Marvel Fan");
             extent.AddSystemInfo("Buid No ", "Earth-616");
 
             return extent;

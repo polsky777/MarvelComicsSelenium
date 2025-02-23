@@ -1,0 +1,25 @@
+﻿<Locators>
+	<SearchPage>		
+		<Text>
+			<LocatorType>XPATH</LocatorType>
+			<LocatorValue>//div[@role='combobox']</LocatorValue>			
+	    </Text>
+		<Characters>
+			<LocatorType>LINK</LocatorType>
+			<LocatorValue>characters</LocatorValue>
+		</Characters>
+		<Groups>
+			<LocatorType>LINK</LocatorType>
+			<LocatorValue>groups</LocatorValue>
+		</Groups>
+		<Comics>
+			<LocatorType>LINK</LocatorType>
+			<LocatorValue>comics</LocatorValue>
+		</Comics>
+		<Videos>
+			<LocatorType>LINK</LocatorType>
+			<LocatorValue>videos</LocatorValue>
+		</Videos>
+	</SearchPage>		
+</Locators>
+	

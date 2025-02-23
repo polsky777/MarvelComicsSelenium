@@ -2,15 +2,6 @@
   "version": 3,
   "targets": {
     "net8.0": {
-      "Antlr/3.4.1.9004": {
-        "type": "package",
-        "compile": {
-          "lib/Antlr3.Runtime.dll": {}
-        },
-        "runtime": {
-          "lib/Antlr3.Runtime.dll": {}
-        }
-      },
       "coverlet.collector/6.0.4": {
         "type": "package",
         "build": {
@@ -72,6 +63,19 @@
         },
         "runtime": {
           "lib/netstandard2.0/ExtentReports.dll": {}
+        }
+      },
+      "FluentAssertions/8.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/FluentAssertions.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/FluentAssertions.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       },
       "log4net/3.0.3": {
@@ -1087,6 +1091,22 @@
           "lib/netcoreapp3.1/RazorEngine.NetCore.dll": {}
         }
       },
+      "Selenium.Support/4.28.0": {
+        "type": "package",
+        "dependencies": {
+          "Selenium.WebDriver": "4.28.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/WebDriver.Support.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/WebDriver.Support.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Selenium.WebDriver/4.28.0": {
         "type": "package",
         "compile": {
@@ -1101,6 +1121,18 @@
         },
         "build": {
           "buildTransitive/Selenium.WebDriver.targets": {}
+        }
+      },
+      "SeleniumExtras.WaitHelpers/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Selenium.WebDriver": "4.0.0-beta2"
+        },
+        "compile": {
+          "lib/netstandard2.1/SeleniumExtras.WaitHelpers.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/SeleniumExtras.WaitHelpers.dll": {}
         }
       },
       "System.Collections.Immutable/5.0.0": {
@@ -1468,36 +1500,10 @@
             "rid": "win"
           }
         }
-      },
-      "WebGrease/1.6.0": {
-        "type": "package",
-        "dependencies": {
-          "Antlr": "3.4.1.9004",
-          "Newtonsoft.Json": "5.0.4"
-        },
-        "compile": {
-          "lib/WebGrease.dll": {}
-        },
-        "runtime": {
-          "lib/WebGrease.dll": {}
-        }
       }
     }
   },
   "libraries": {
-    "Antlr/3.4.1.9004": {
-      "sha512": "c1S+HBE+KYA5EBxtn25LEK02hHPH/tDQ6RviUTTCJpZIPoputtn8ArsQJy9lVJWZOnw37ufByO2Fmf1M8wpr8Q==",
-      "type": "package",
-      "path": "antlr/3.4.1.9004",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "antlr.3.4.1.9004.nupkg.sha512",
-        "antlr.nuspec",
-        "lib/Antlr3.Runtime.dll",
-        "lib/Antlr3.Runtime.pdb"
-      ]
-    },
     "coverlet.collector/6.0.4": {
       "sha512": "lkhqpF8Pu2Y7IiN7OntbsTtdbpR1syMsm2F3IgX6ootA4ffRqWL5jF7XipHuZQTdVuWG/gVAAcf8mjk8Tz0xPg==",
       "type": "package",
@@ -1647,6 +1653,33 @@
         "extentreports.5.0.4.nupkg.sha512",
         "extentreports.nuspec",
         "lib/netstandard2.0/ExtentReports.dll"
+      ]
+    },
+    "FluentAssertions/8.0.1": {
+      "sha512": "IW5CdXiD4BIijMkJsEajhkQr7HSgzoxZBHp77b4tm8isCKGaDH2AGugW6DLS0/EPhO/MCZ2JOGg6ObdlKISJMg==",
+      "type": "package",
+      "path": "fluentassertions/8.0.1",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "FluentAssertions.png",
+        "LICENSE.md",
+        "fluentassertions.8.0.1.nupkg.sha512",
+        "fluentassertions.nuspec",
+        "lib/net47/FluentAssertions.dll",
+        "lib/net47/FluentAssertions.pdb",
+        "lib/net47/FluentAssertions.xml",
+        "lib/net6.0/FluentAssertions.dll",
+        "lib/net6.0/FluentAssertions.pdb",
+        "lib/net6.0/FluentAssertions.xml",
+        "lib/netstandard2.0/FluentAssertions.dll",
+        "lib/netstandard2.0/FluentAssertions.pdb",
+        "lib/netstandard2.0/FluentAssertions.xml",
+        "lib/netstandard2.1/FluentAssertions.dll",
+        "lib/netstandard2.1/FluentAssertions.pdb",
+        "lib/netstandard2.1/FluentAssertions.xml",
+        "tools/init.ps1"
       ]
     },
     "log4net/3.0.3": {
@@ -3098,6 +3131,20 @@
         "razorengine.netcore.nixfix.nuspec"
       ]
     },
+    "Selenium.Support/4.28.0": {
+      "sha512": "6S1gZacGGDRitU2kO92AUHQU1JkMdiFK4NAm6fn8+6eZMU8n04MF6skH6oUqkWAv0wyF1rKWD5IBMFiTBm6G5A==",
+      "type": "package",
+      "path": "selenium.support/4.28.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/netstandard2.0/WebDriver.Support.dll",
+        "lib/netstandard2.0/WebDriver.Support.xml",
+        "selenium.support.4.28.0.nupkg.sha512",
+        "selenium.support.nuspec"
+      ]
+    },
     "Selenium.WebDriver/4.28.0": {
       "sha512": "g4iZWBHQH5dObJQKcKXsol8yFJPIkXhVdn/8P726d4OmpHgQ9aYSwtTCWo+FUYHIkMS+haItgeOT6hilmLeHNw==",
       "type": "package",
@@ -3118,6 +3165,19 @@
         "manager/windows/selenium-manager.exe",
         "selenium.webdriver.4.28.0.nupkg.sha512",
         "selenium.webdriver.nuspec"
+      ]
+    },
+    "SeleniumExtras.WaitHelpers/1.0.2": {
+      "sha512": "de7m30nkZZLkfCncYBdluUpM27AR/Vkk4kiA4HRQbV+fZI3ps4qGIeJCuj8TAMXdMfQik5Rno8xPnFBIod+ebg==",
+      "type": "package",
+      "path": "seleniumextras.waithelpers/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "lib/netstandard2.1/SeleniumExtras.WaitHelpers.dll",
+        "seleniumextras.waithelpers.1.0.2.nupkg.sha512",
+        "seleniumextras.waithelpers.nuspec"
       ]
     },
     "System.Collections.Immutable/5.0.0": {
@@ -3949,32 +4009,20 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "WebGrease/1.6.0": {
-      "sha512": "1d29edoh4IZPLig82coowiPBS1ltxT97PwEIkOk0dHqtJwD9v5C7gPm6Ot1hKHT86otKm04oDQ00x5c+PyVyxw==",
-      "type": "package",
-      "path": "webgrease/1.6.0",
-      "hasTools": true,
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/WebGrease.dll",
-        "tools/WG.EXE",
-        "webgrease.1.6.0.nupkg.sha512",
-        "webgrease.nuspec"
-      ]
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "EPPlus >= 7.6.0",
       "ExtentReports >= 5.0.4",
+      "FluentAssertions >= 8.0.1",
       "Microsoft.NET.Test.Sdk >= 17.13.0",
       "NUnit >= 4.3.2",
       "NUnit.Analyzers >= 4.6.0",
       "NUnit3TestAdapter >= 5.0.0",
+      "Selenium.Support >= 4.28.0",
       "Selenium.WebDriver >= 4.28.0",
-      "WebGrease >= 1.6.0",
+      "SeleniumExtras.WaitHelpers >= 1.0.2",
       "coverlet.collector >= 6.0.4",
       "log4net >= 3.0.3"
     ]
@@ -4037,6 +4085,10 @@
             "target": "Package",
             "version": "[5.0.4, )"
           },
+          "FluentAssertions": {
+            "target": "Package",
+            "version": "[8.0.1, )"
+          },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
             "version": "[17.13.0, )"
@@ -4055,13 +4107,17 @@
             "target": "Package",
             "version": "[5.0.0, )"
           },
+          "Selenium.Support": {
+            "target": "Package",
+            "version": "[4.28.0, )"
+          },
           "Selenium.WebDriver": {
             "target": "Package",
             "version": "[4.28.0, )"
           },
-          "WebGrease": {
+          "SeleniumExtras.WaitHelpers": {
             "target": "Package",
-            "version": "[1.6.0, )"
+            "version": "[1.0.2, )"
           },
           "coverlet.collector": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -4093,27 +4149,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Antlr 3.4.1.9004' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
-      "libraryId": "Antlr",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'WebGrease 1.6.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
-      "libraryId": "WebGrease",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  }
 }
